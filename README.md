@@ -132,10 +132,10 @@ python src/client.py
 * Server responses are stdout/stderr output from executing commands
 
 **Flow**
-* 1. Server sends CWD -> Client displays prompt
-* 2. Client sends command -> Server executes
-* 3. Server sends output -> Client prints output
-* 4. Repeat until client sends `"quit"` or connection is closed
+1. Server sends CWD -> Client displays prompt
+2. Client sends command -> Server executes
+3. Server sends output -> Client prints output
+4. Repeat until client sends `"quit"` or connection is closed
 
 **Disconnect Handling**
 * If client disconnects unexpectedly, the server detects a broken socket and closes the session
