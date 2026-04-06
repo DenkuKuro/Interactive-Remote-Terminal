@@ -9,6 +9,7 @@
 | Name | Student ID | Email |
 | :---- | :---- | :---- |
 | Isaac Liu | 301544334 | itl3@sfu.ca |
+| Javier Deng Xu | 301637487 | jda174@sfu.ca |
 
 ## **1\. Project Overview & Description**
 
