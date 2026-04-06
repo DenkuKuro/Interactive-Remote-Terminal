@@ -44,14 +44,18 @@ def socket_accept():
         currentWD = os.getcwd() + "> "
         conn.send(str.encode(currentWD))
         client_res = conn.recv(1024)
+        if not client_res:
+            print("\nClient disconnected.")
+            break
+
         if client_res.decode("utf-8") == "quit":
-            conn.close()
-            s.close()
-            sys.exit()
             break
         execute_command(client_res, conn)
     
     conn.close()
+    s.close()
+    print("Server socket closed.")
+    sys.exit()
     
 def execute_command(cmd, conn):
     decoded = cmd.decode("utf-8", errors="ignore")
@@ -71,6 +75,9 @@ def execute_command(cmd, conn):
                                 stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
         output_byte = proc.stdout.read() + proc.stderr.read()
         output_str = output_byte.decode("utf-8", errors="ignore")
+        # if command has no output, send new line to prevent client.recv() from blocking
+        if output_str == "":
+            output_str = "\n"
         conn.send(str.encode(output_str))
         print(output_str)
             
