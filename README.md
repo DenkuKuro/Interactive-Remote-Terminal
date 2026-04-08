@@ -30,7 +30,8 @@ As required by the project specifications, we have identified and handled (or de
 ## **3\. Video Demo**
 
 Our 2-minute video demo:
-[**▶️ Watch Project Demo on YouTube**](link)
+[**▶️ Watch Project Demo on YouTube**](
+https://youtu.be/2jGgGucowtM)
 
 ## **4\. Prerequisites (Fresh Environment)**
 
